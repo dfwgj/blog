@@ -1,47 +1,91 @@
 <div class="sidebar-author">
-  <img data-src="<%- url_for('/avatar/' + theme.avatar, {relative: false}) %>" data-sizes="auto" alt="<%= config.author %>" class="lazyload">
-  <div class="sidebar-author-name"><%= config.author %></div>
-  <div class="sidebar-description"><%= config.description%></div>
+  <img data-src="<%- url_for('/avatar/' + theme.avatar, {relative: false}) %>" data-sizes="auto"
+    alt="<%= config.author %>" class="lazyload">
+  <div class="sidebar-author-name">
+    <%= config.author %>
+  </div>
+  <div class="sidebar-description">
+    <%= config.description%>
+  </div>
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
-    <div><%= __("sidebar.post") %></div>
-    <div class="sidebar-state-number"><%= site.posts.length %></div>
+    <div>
+      <%= __("sidebar.post") %>
+    </div>
+    <div class="sidebar-state-number">
+      <%= site.posts.length %>
+    </div>
   </div>
   <div class="sidebar-state-category">
-    <div><%= __("sidebar.category") %></div>
-    <div class="sidebar-state-number"><%= site.categories.length %></div>
+    <div>
+      <%= __("sidebar.category") %>
+    </div>
+    <div class="sidebar-state-number">
+      <%= site.categories.length %>
+    </div>
   </div>
   <div class="sidebar-state-tag">
-    <div><%= __("sidebar.tag") %></div>
-    <div class="sidebar-state-number"><%= site.tags.length %></div>
+    <div>
+      <%= __("sidebar.tag") %>
+    </div>
+    <div class="sidebar-state-number">
+      <%= site.tags.length %>
+    </div>
   </div>
 </div>
 <div class="sidebar-social">
   <% for (let i in theme.social) { %>
     <div class="<%= `icon-${i}` %> sidebar-social-icon">
-      <a href=<%= theme.social[i] %> itemprop="url" target="_blank" aria-label="<%= i %>" rel="noopener external nofollow noreferrer"></a>
+      <a href=<%=theme.social[i] %> itemprop="url" target="_blank" aria-label="<%= i %>" rel="noopener external nofollow
+          noreferrer"></a>
     </div>
-  <% } %>
+    <% } %>
 </div>
 <div class="sidebar-menu">
   <% if (!Array.isArray(theme.menu)) { %>
     <% for (let i in theme.menu) { %>
       <div class="sidebar-menu-link-wrap">
-        <a class="sidebar-menu-link-dummy" href="<%- url_for_lang(theme.menu[i], { relative: false }) %>" aria-label="<%= __(i) %>"></a>
+        <a class="sidebar-menu-link-dummy" href="<%- url_for_lang(theme.menu[i], { relative: false }) %>"
+          aria-label="<%= __(i) %>"></a>
         <div class="sidebar-menu-icon icon-taichi"></div>
-        <div class="sidebar-menu-link"><%= __(i) %></div>
-      </div>
-    <% } %>
-  <% } else { %>
-    <% for (let item of theme.menu) { %>
-      <div class="sidebar-menu-link-wrap">
-        <a class="sidebar-menu-link-dummy" href="<%- url_for_lang(item.url, { relative: false }) %>" aria-label="<%= __(item.name) %>"></a>
-        <div class="sidebar-menu-icon icon <%= (item.icon === 'e62b' && theme.icon_font) || (item.icon === 'f6ad' && !theme.icon_font) || !item.icon ? 'rotate' : '' %>">
-          <%- item.icon ? `&#x${item.icon};` : (theme.icon_font ? '&#xe62b;' : '&#xf6ad;') %>
+        <div class="sidebar-menu-link">
+          <%= __(i) %>
         </div>
-        <div class="sidebar-menu-link"><%= __(item.name) %></div>
       </div>
-    <% } %>
-  <% } %>
+      <% } %>
+        <% } else { %>
+          <% for (let item of theme.menu) { %>
+            <div class="sidebar-menu-link-wrap">
+              <a class="sidebar-menu-link-dummy" href="<%- url_for_lang(item.url, { relative: false }) %>"
+                aria-label="<%= __(item.name) %>"></a>
+              <div
+                class="sidebar-menu-icon icon <%= (item.icon === 'e62b' && theme.icon_font) || (item.icon === 'f6ad' && !theme.icon_font) || !item.icon ? 'rotate' : '' %>">
+                <% if (item.icon && (/^https?:|^\/|\.svg$|\.png$|\.jpg$/i.test(item.icon))) { %>
+                  <% 
+                    // 为选中状态准备白色版本的图标
+                    let normalIcon = url_for(item.icon, { relative: false });
+                    let activeIcon = normalIcon;
+                    // 如果是SVG文件，生成白色版本的路径
+                    if (item.icon.endsWith('.svg')) {
+                      // 先尝试替换已有的颜色代码
+                      activeIcon = normalIcon.replace(/(-[0-9a-fA-F]{6})\.svg$/i, '-ffffff.svg');
+                      // 如果没有颜色代码，则在.svg前添加-ffffff
+                      if (activeIcon === normalIcon) {
+                        activeIcon = normalIcon.replace(/\.svg$/i, '-ffffff.svg');
+                      }
+                    }
+                  %>
+                  <img class="sidebar-menu-icon-normal" src="<%- normalIcon %>" alt="<%= item.name %>" style="width:30px;height:30px;object-fit:contain;">
+                  <img class="sidebar-menu-icon-active" src="<%- activeIcon %>" alt="<%= item.name %>" style="width:30px;height:30px;object-fit:contain;display:none;">
+                <% } else { %>
+                  <%- item.icon ? `&#x${item.icon};` : (theme.icon_font ? '&#xe62b;' : '&#xf6ad;' ) %>
+                <% } %>
+              </div>
+              <div class="sidebar-menu-link">
+                <%= __(item.name) %>
+              </div>
+            </div>
+            <% } %>
+              <% } %>
 </div>

@@ -8,16 +8,16 @@ theme_config_check: true
 menu:
   - name: home
     url: /
-    icon: # default use taichi icon, you can use a hexadecimal representation of fontawesome or icon_font, like 'f0c1'
+    icon: /images/algolia_logo.svg
   - name: archives
     url: /archives
-    icon:
+    icon: /images/algolia_logo.svg
   - name: about
-    url: /about
-    icon:
+    url: https://github.com/dfwgj
+    icon: /images/algolia_logo.svg
   - name: friend
-    url: /friend
-    icon:
+    url: https://oss.gdmu-stuorg.com/xierfloat/01983265-e74d-73e8-a9ea-80400b68a747.jpg
+    icon: /images/algolia_logo.svg
 
 banner: "/images/banner.webp" # which means themes/reimu/source/images/banner.webp
 # You can also write it in the form of the following url
@@ -64,7 +64,7 @@ excerpt_link: Read More
 
 # RSS
 # need https://github.com/hexojs/hexo-generator-feed
-rss: atom.xml
+# rss: atom.xml
 
 # a very simple alternative for https://hexo.io/api/injector
 injector:
@@ -156,7 +156,7 @@ anchor_icon: # default use '#' icon, you can use a hexadecimal representation of
 reimu_cursor:
   enable: true
   cursor:
-    default: ../images/cursor/reimu-cursor-default.png  # this path is relative to the css/style.css, so it needs to go up one level to reach the images folder
+    default: ../images/cursor/reimu-cursor-default.png # this path is relative to the css/style.css, so it needs to go up one level to reach the images folder
     pointer: ../images/cursor/reimu-cursor-pointer.png
     text: ../images/cursor/reimu-cursor-text.png
 
@@ -371,8 +371,8 @@ generator_search:
 # Loader animation
 preloader:
   enable: true
-  text: 少女祈祷中...
-  icon: # default use inline svg for fast speed, you can use a image url, like '/images/taichi.png'
+  text: 美神降临中...
+  icon: "/images/taichi.png"
 
 # see https://github.com/D-Sketon/aos.js
 animation:
@@ -555,7 +555,7 @@ player:
       autoplay:
       loop:
       order:
-      preload: 
+      preload:
       volume:
       mutex:
       listFolded:
