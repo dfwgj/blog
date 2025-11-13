@@ -1,3 +1,14 @@
+
+---
+title: 若依框架 + Tauri 2.0：一次跨平台桌面应用的踩坑之旅
+date: 2025-11-14 00:06:00
+cover: /covers/Tauri.svg
+categories:
+     - 工程化
+tags:
+    - Tauri
+    - 若依
+---
 # 若依框架 + Tauri 2.0：一次跨平台桌面应用的踩坑之旅
 
 ## 起因
